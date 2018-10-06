@@ -18,6 +18,7 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     plumber = require('gulp-plumber'),
     pug = require('gulp-pug'),
+    babel = require('gulp-babel'),
     watch = require('gulp-watch');
 
 
@@ -47,7 +48,7 @@ gulp.task('styles', function() {
     .pipe(plumber({
       errorHandler: notify.onError('Error: <%= error.message %>')
     }))
-    .pipe(sass({ outputStyle: 'compressed' }))
+    .pipe(sass())
     .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'))
     .pipe(gulp.dest('dist/styles'))
     .pipe(rename({ suffix: '.min' }))
@@ -61,10 +62,11 @@ gulp.task('scripts', function() {
     .pipe(plumber({
       errorHandler: notify.onError('Error: <%= error.message %>')
     }))
-    .pipe(concat('main.js'))
+    // .pipe(concat('main.js'))
+    .pipe(babel())
     .pipe(gulp.dest('dist/scripts'))
     .pipe(rename({ suffix: '.min' }))
-    .pipe(uglify())
+    // .pipe(uglify())
     .pipe(gulp.dest('dist/scripts'))
 });
 
@@ -81,8 +83,8 @@ gulp.task('images', function() {
 
 // Clean
 gulp.task('clean', function() {
-  return gulp.src(['dist/styles', 'dist/scripts', 'dist/images'], {read: false})
-    .pipe(clean());
+  // return gulp.src(['dist/styles', 'dist/scripts', 'dist/images'], {read: false})
+    // .pipe(clean());
 });
 
 // Default task

@@ -1,3 +1,7 @@
-.a {
-  color: red
-}
+@import 'settings/reset';
+@import 'settings/variable';
+@import 'settings/breakpoint';
+@import 'settings/font';
+@import 'settings/base';
+
+@import 'pages/lyric';
