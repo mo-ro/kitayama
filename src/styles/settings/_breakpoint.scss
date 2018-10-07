@@ -1,0 +1,20 @@
+$mq-breakpoint-small: 760px;
+$mq-breakpoint-medium: 1180px;
+
+@mixin mq-small {
+  @media (max-width: #{$mq-breakpoint-small - 1}) {
+    @content;
+  }
+}
+
+@mixin mq-medium {
+  @media (max-width: #{$mq-breakpoint-medium - 1}) {
+    @content;
+  }
+}
+
+@mixin mq-large {
+  @media (min-width: #{$mq-breakpoint-small}) {
+    @content;
+  }
+}
