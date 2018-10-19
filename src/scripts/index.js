@@ -1,4 +1,6 @@
 let hue = null;
+let bgFlg = false;
+let buttonFlg = false;
 
 function setup() {
   createCanvas(innerWidth, innerHeight);
@@ -10,7 +12,6 @@ function draw() {
   rect(0, 0, width, height);
   const lineNum = 15;
   const segmentNum = 12;
-  let bgFlg = false;
   [...Array(lineNum).keys()].forEach(j => {
     const time = Date.now() / 10000;
     const coefficient = 50 + j;
@@ -20,6 +21,13 @@ function draw() {
     if(bgFlg === false && j === lineNum - 2) {
       $("main").css('background', 'linear-gradient(transparent, hsla(' + h +',' + s + '%,' + l + '%, .4)');
       bgFlg = true;
+    }
+    if(buttonFlg === false && j === lineNum - 4) {
+
+      $(".js-lyric-scrolltop").css({
+        background: 'hsl(' + h +',' + s + '%,' + l + '%)'
+      })
+      buttonFlg = true;
     }
     beginShape();
     stroke(h, s, l, .1);
@@ -40,10 +48,57 @@ $(window).on('resize', function() {
 });
 
 $(window).on('load', function() {
+
   TweenMax.to(".js-lyric-fadein", .5, {
     filter: 'blur(0)',
     opacity: 1,
     transform: 'scale(1)',
     delay: .5
-  })
+  });
+
+  $.map($(".js-lyric-scrollin"), function(item) {
+    scrollIn(item);
+  });
+
+  scrollToTop();
 })
+
+let scroll;
+const winHeight = $(window).height();
+
+$(window).on("scroll", function(){
+  scroll = $(this).scrollTop();
+})
+
+function scrollIn(target) {
+  const $target = $(target)
+  const targetTop = $target.offset().top;
+  $(window).on('scroll', function() {
+    if(scroll > targetTop - winHeight) {
+      TweenMax.to($target, .4, {
+        transform: 'translateY(0)',
+        opacity: 1,
+        delay: .2
+      })
+    }
+  });
+}
+
+function scrollToTop() {
+
+  $(".js-lyric-scrolltop").on('click', function() {
+    $("html, body").animate({scrollTop:0});
+  })
+
+  $(window).on('scroll', function() {
+    if(scroll > 600) {
+      TweenMax.to(".js-lyric-scrolltop", .4, {
+        y: 0
+      })
+    } else {
+      TweenMax.to(".js-lyric-scrolltop", .4, {
+        y: 100
+      })
+    }
+  })
+}

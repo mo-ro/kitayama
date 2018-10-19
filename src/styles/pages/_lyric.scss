@@ -1,3 +1,7 @@
+main {
+  padding-bottom: 40px;
+}
+
 .lyric-hero {
   align-items: center;
   font-size: 4rem;
@@ -35,7 +39,7 @@
 }
 
 .lyric-content {
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.7);
   border-radius: 8px;
   box-shadow: 0 0 20px rgba(0, 0, 0, .1);
   box-sizing: border-box;
@@ -79,7 +83,7 @@
 
 .lyric-side {
   align-self: flex-start;
-  background-color: rgba(255, 255, 255, .6);
+  background-color: rgba(255, 255, 255, .7);
   border-radius: 8px;
   box-shadow: 0 0 20px rgba(0, 0, 0, .1);
   font-size: 1.4rem;
@@ -99,8 +103,8 @@
   }
 
   @include mq-small {
-    display: block;
-    // padding: 40px 78px;
+    align-items: center;
+    flex-direction: column;
   }
 
   > .image {
@@ -112,6 +116,11 @@
       margin-bottom: 0;
       margin-right: 40px;
     }
+
+    @include mq-small {
+      margin-right: 0;
+      margin-bottom: 40px;
+    }
   }
 }
 
@@ -119,6 +128,11 @@
 
   @include mq-medium {
     margin-right: 40px;
+  }
+
+  @include mq-small {
+    margin-right: 0;
+    text-align: center;
   }
 
   > .title {
@@ -157,6 +171,10 @@
     height: 180px;
   }
 
+  @include mq-small {
+    align-self: stretch;
+  }
+
   > .item {
     &:not(:last-child) {
       margin-bottom: 20px;
@@ -165,6 +183,48 @@
 
   > .item > .link {
     color: $BLUE;
+  }
+}
+
+.lyric-scrolltop {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .1), 0 2px 4px rgba(0, 0, 0, .1);
+  border-radius: 100%;
+  cursor: pointer;
+  display: none;
+  bottom: 20px;
+  height: 58px;
+  position: fixed;
+  right: 20px;
+  width: 58px;
+
+  &::after {
+    mix-blend-mode: exclusion;
+    content: "";
+    display: inline-block;
+    border-top: 3px solid #fff;
+    border-right: 3px solid #fff;
+    height: 16px;
+    top: 36%;
+    left: 56%;
+    transform: rotate(-45deg) translate(-50%, -50%);
+    position: absolute;
+    width: 16px;
+  }
+
+  &::before {
+    mix-blend-mode: exclusion;
+    color: #fff;
+    content: "TOP";
+    font-size: 1rem;
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  @include mq-small {
+    display: block;
+    align-items: center;
   }
 }
 

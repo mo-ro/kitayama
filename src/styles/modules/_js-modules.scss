@@ -4,3 +4,13 @@
   transform: scale(1.02);
   transform-origin: center 0;
 }
+
+.js-lyric-scrollin {
+  display: inline-block;
+  transform: translateY(10px);
+  opacity: 0;
+}
+
+.js-lyric-scrolltop {
+  transform: translateY(100px);
+}
